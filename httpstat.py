@@ -39,14 +39,22 @@ curl_format = """{
 }"""
 
 https_template = """
-  DNS Lookup   TCP Connection   SSL Handshake   Server Processing   Content Transfer
-[   {a0000}  |     {a0001}    |    {a0002}    |      {a0003}      |      {a0004}     ]
-             |                |               |                   |                  |
-    namelookup:{b0000}        |               |                   |                  |
-                        connect:{b0001}       |                   |                  |
-                                    pretransfer:{b0002}           |                  |
-                                                      starttransfer:{b0003}          |
-                                                                                 total:{b0004}
+  DNS Lookup           
+    {a0000}  
+                namelookup:{b0000} 
+  TCP Connection        
+    {a0001}                          
+                connect:{b0001}
+  SSL Handshake                                            
+    {a0002}    
+                pretransfer:{b0002} 
+  Server Processing
+    {a0003}  
+                starttransfer:{b0003}    
+  Content Transfer
+    {a0004} 
+                total:{b0004}
+                                                                                 
 """[1:]
 
 http_template = """
@@ -226,7 +234,7 @@ def main():
 
     # colorize template first line
     tpl_parts = template.split('\n')
-    tpl_parts[0] = grayscale[16](tpl_parts[0])
+    #tpl_parts[0] = grayscale[16](tpl_parts[0])
     template = '\n'.join(tpl_parts)
 
     def fmta(s):
