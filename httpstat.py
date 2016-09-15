@@ -42,8 +42,8 @@ https_template = """
   DNS Lookup   TCP Connection   SSL Handshake   Server Processing   Content Transfer
 [   {a0000}  |     {a0001}    |    {a0002}    |      {a0003}      |      {a0004}     ]
              |                |               |                   |                  |
-             |                |               |                   |                  |
-    namelookup:{b0000}  connect:{b0001}       |                   |                  |
+    namelookup:{b0000}        |               |                   |                  |
+                        connect:{b0001}       |                   |                  |
                                     pretransfer:{b0002}           |                  |
                                                       starttransfer:{b0003}          |
                                                                                  total:{b0004}
@@ -197,10 +197,10 @@ def main():
     for loop, line in enumerate(headers.split('\n')):
         if loop == 0:
             p1, p2 = tuple(line.split('/'))
-            print(green(p1) + grayscale[14]('/') + cyan(p2))
+            print(red(p1) + grayscale[14]('/') + blue(p2))
         else:
             pos = line.find(':')
-            print(grayscale[14](line[:pos + 1]) + cyan(line[pos + 1:]))
+            print(grayscale[14](line[:pos + 1]) + blue(line[pos + 1:]))
 
     print()
 
@@ -216,7 +216,7 @@ def main():
         else:
             print(body)
     else:
-        print('{} stored in: {}'.format(green('Body'), bodyf.name))
+        print('{} stored in: {}'.format(red('Body'), bodyf.name))
 
     # print stat
     if url.startswith('https://'):
@@ -230,10 +230,10 @@ def main():
     template = '\n'.join(tpl_parts)
 
     def fmta(s):
-        return cyan('{:^7}'.format(str(s) + 'ms'))
+        return blue('{:^7}'.format(str(s) + 'ms'))
 
     def fmtb(s):
-        return cyan('{:<7}'.format(str(s) + 'ms'))
+        return blue('{:<7}'.format(str(s) + 'ms'))
 
     stat = template.format(
         # a
